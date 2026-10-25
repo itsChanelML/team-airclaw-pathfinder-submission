@@ -19,7 +19,8 @@ Pathfinder discovers the tools and models the arena exposes, gathers evidence fo
 7. [Project outline](#project-outline)
 8. [Testing](#testing)
 9. [Results](#results)
-10. [Verify and run](#verify-and-run)
+10. [Next steps and feedback](#next-steps-and-feedback)
+11. [Verify and run](#verify-and-run)
 
 ---
 
@@ -204,6 +205,21 @@ Logged runs of the final version on the shared Practice arena, which has five sy
 These are small samples on a practice set, so they show the agent works end to end and holds up under repeated runs. They do not show how it will rank against other entries.
 
 Scoring weights (defaults): quality 70%, speed 15%, tool coverage 10%, token efficiency 5%. Tool coverage and token efficiency were 100 and 99 in every run, so the remaining headroom is image quality and speed.
+
+## Next steps and feedback
+
+What I would do next, and what I ran into along the way.
+
+**Next experiments**
+- **A second model as the checker.** The model that solves a puzzle also audits it. The one text miss was on the hard puzzle, which is where an independent judge would help most.
+- **Tool discovery on a richer server.** Practice has five synthetic puzzles and a fixed tool set, so the schema-based tool calls are tested against fakes and Practice only. I would like to run them against tools I did not write tests for.
+- **Use the protected-change check.** It is built and unit-tested, but no Gauntlet task needs it. It needs a task that changes the environment the agent runs in.
+- **Publish the tests.** They stay out of the archive by the packaging rules. A separate folder or repository would let others run them.
+
+**Feedback on the event setup**
+- The kit's certification rehearsal (lobby, GO, submit, exact retry, 409) cannot be completed on Practice, so I checked those paths with scripted fakes instead. A Practice mode that opens a rehearsal round would let entrants test them end to end.
+- Practice has a per-agent daily cost cap. It was useful as a guardrail, but a stretch of heavy iteration hit it, and the reset time is easy to miss.
+- It was not clear from the docs whether an entry can be resubmitted after it is sent, or how the repository link and the checksum are used afterwards.
 
 ## Verify and run
 
